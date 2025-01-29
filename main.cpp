@@ -85,7 +85,7 @@ class Main : protected Fruit {
             for(int i=0; i<=width+1; i++) {
                 cout << "-";
             }
-            cout << endl;
+            cout << endl << endl;
             cout << name << "'s Score : " << this->score <<endl;
         }
         
@@ -187,7 +187,9 @@ int main() {
     int diff = 0;
     cout << endl;
     cout << "Difficulty Levels : " << endl;
-    cout << "1. Easy\n2. Medium\n3. Hard\nSet Difficulty Level : ";
+    cout << "1. Easy\n2. Medium\n3. Hard\n\n";
+    cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n";
+    cout << "Set Difficulty Level : ";
     cin >> diff;
     
     if (diff == 3) {
@@ -200,7 +202,7 @@ int main() {
         diff = 150;
     }
 
-    bool play = false;
+    int play = 0;
 
     do {
         Main game;
@@ -216,15 +218,16 @@ int main() {
         
         system("cls");
 
-        cout << "\n\n\n\n\n                                           ";
+        cout << "\n\n\n\n\n                                   ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
 
         cout << "\n\nDo You Want To Play Again..?\n\n";
+        cout << "NOTE : If You Press Key Other Than 0 or 1 Then Computer will treat it as 0..\n";
         cout << "Enter 1 For \"YES\" and 0 For \"NO\" : ";
 
         cin >> play;
 
-    } while(play);
+    } while(play == 1);
 
     cout << "\n\n\n\n\nOkay, Byee...\n\n\n\n\n";
 
