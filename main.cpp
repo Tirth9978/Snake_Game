@@ -3,10 +3,21 @@
 #include <windows.h>
 using namespace std;
 
+
+// ENUM Part
 enum direction { 
     STOP = 0, LEFT, RIGHT, UP, DOWN
 };
+
+/*
+We use encapsulation to make our variables private and ensure data security. Additionally, we implement inheritance to establish relationships between classes.
+
+At the starting point, all constructors will be called, initializing and allocating the necessary resources for the game.
+*/
+
+// Main game base
 class Game { 
+    // Here Encapsulation . we Protect variables members . 
     protected : 
         int width;
         int height;
@@ -15,6 +26,10 @@ class Game {
         direction Dir;
     
     public : 
+        /*
+        First this will be called After creation of class
+        */
+
         Game() {
             this->width = 70;
             this->height = 20;
@@ -24,6 +39,7 @@ class Game {
         }
 };
 
+// This is the class inherite from Game calss 
 class Snake : protected Game {
     protected : 
         int snakeX, snakeY;
@@ -32,6 +48,9 @@ class Snake : protected Game {
         int Tail_Length;
         
     public : 
+        /*
+        In Second this will be called
+        */
         Snake() {
             this->snakeX = this->width / 2;
             this->snakeY = this->height / 2;
@@ -42,11 +61,13 @@ class Snake : protected Game {
     
 };
 
+// From Snake Class
 class Fruit : protected Snake { 
     protected : 
         int fruitX, fruitY;
     
     public : 
+        //In Third, this will be called
         Fruit() { 
             this->fruitX = rand() % (this->width-1);
             this->fruitY = rand() % (this->height-1);
