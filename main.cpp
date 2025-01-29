@@ -3,7 +3,9 @@
 #include <windows.h>
 using namespace std;
 
-enum direction { STOP = 0, LEFT, RIGHT, UP, DOWN };
+enum direction { 
+    STOP = 0, LEFT, RIGHT, UP, DOWN
+};
 class Game { 
     protected : 
         int width;
