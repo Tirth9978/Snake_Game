@@ -54,19 +54,22 @@ class Fruit : protected Snake {
 
 class Main : protected Fruit {
     public : 
-        void Main_Board() { 
+        void Main_Board(string name) { 
             system("cls");
             
-            for(int i=0; i<this->width+2; i++){
+            for(int i=0; i<this->width+2; i++) {
                 cout << "-";
             } cout << endl;
             
             for(int i=1; i<height; i++) {
                 for(int j=0; j<=width+1; j++) {
-                    if(j == 0 || j == width+1) cout << "|";
-                    else if(j == snakeX && i == snakeY) cout << "0";
-                    else if(j == fruitX && i == fruitY) cout << "*";
-                    else {
+                    if(j == 0 || j == width+1) {
+                        cout << "|";
+                    } else if(j == snakeX && i == snakeY) {
+                        cout << "O";
+                    } else if(j == fruitX && i == fruitY) {
+                        cout << "@";
+                    } else {
                         bool find = false;
                         for(int k=0; k<Tail_Length; k++) {
                             if(Tail_X[k] == j && Tail_Y[k] == i) {
@@ -79,9 +82,11 @@ class Main : protected Fruit {
                 }
                 cout << endl;
             }
-            for(int i=0; i<=width+1; i++) cout << "-";
+            for(int i=0; i<=width+1; i++) {
+                cout << "-";
+            }
             cout << endl;
-            cout << "Score : " << this->score <<endl;
+            cout << name << "'s Score : " << this->score <<endl;
         }
         
         void Update_Game(){
@@ -114,7 +119,7 @@ class Main : protected Fruit {
                 snakeY++;
             }
 
-            if(snakeX > width || snakeX <= 0 || snakeY >= height || snakeY <= 0) {
+            if(snakeX >= width || snakeX <= 0 || snakeY >= height || snakeY <= 0) {
                 isGameOver = true;
             }
 
@@ -153,16 +158,16 @@ class Main : protected Fruit {
         void Input() { 
             if(_kbhit()) {
                 char ch = _getch();
-                if(ch == 'a') {
+                if(ch == 'a' && Dir != RIGHT) {
                     Dir = LEFT;
-                } else if(ch == 's') {
+                } else if(ch == 's' && Dir != UP) {
                     Dir = DOWN;
-                } else if(ch == 'w') {
+                } else if(ch == 'w' && Dir != DOWN) {
                     Dir = UP;
-                } else if(ch == 'd') {
+                } else if(ch == 'd' && Dir != LEFT) {
                     Dir = RIGHT;
                 } else if(ch == 27) {
-                    isGameOver = 1;
+                    isGameOver = true;
                 }
             }
         }
@@ -180,7 +185,9 @@ int main() {
     cin >> name;
 
     int diff = 0;
-    cout << "Set Difficulty: ";
+    cout << endl;
+    cout << "Difficulty Levels : " << endl;
+    cout << "1. Easy\n2. Medium\n3. Hard\nSet Difficulty Level : ";
     cin >> diff;
     
     if (diff == 3) {
@@ -193,16 +200,33 @@ int main() {
         diff = 150;
     }
 
-    Main game;
+    bool play = false;
+
+    do {
+        Main game;
     
-    while(!game.isOver()){
+        while(!game.isOver()){
         
-        game.Main_Board();
-        game.Input();
-        game.Update_Game();
+            game.Main_Board(name);
+            game.Input();
+            game.Update_Game();
         
-        Sleep(diff);
-    }
+            Sleep(diff);
+        }
+        
+        system("cls");
+
+        cout << "\n\n\n\n\n                                           ";
+        cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
+
+        cout << "\n\nDo You Want To Play Again..?\n\n";
+        cout << "Enter 1 For \"YES\" and 0 For \"NO\" : ";
+
+        cin >> play;
+
+    } while(play);
+
+    cout << "\n\n\n\n\nOkay, Byee...\n\n\n\n\n";
 
     return 0;
 }
