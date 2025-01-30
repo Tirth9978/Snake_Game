@@ -9,6 +9,7 @@
 #else 
     #include <termios.h>
     #include <unistd.h>
+    #include <fcntl.h>
     #define CLEAR "clear"
 
     int _kbhit() {
