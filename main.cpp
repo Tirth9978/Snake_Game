@@ -1,6 +1,54 @@
 #include <iostream>
-#include <conio.h>
-#include <windows.h>
+#include <cstdlib>
+#include <ctime>
+
+#if defined(_WIN32) || defined(_WIN64)
+    #include <conio.h>
+    #include <windows.h>
+    #define CLEAR "cls"
+#else 
+    #include <termios.h>
+    #include <unistd.h>
+    #define CLEAR "clear"
+
+    int _kbhit() {
+        struct termios oldt, newt;
+        int ch;
+        int oldf;
+
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+        fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+        ch = getchar();
+
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+        if (ch != EOF) {
+            ungetc(ch, stdin);
+            return 1;
+        }
+        return 0;
+    }
+
+    int _getch() {
+        struct termios oldt, newt;
+        int ch;
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        return ch;
+    }
+
+#endif
+
 using namespace std;
 
 
@@ -82,7 +130,7 @@ In this we have Main_Board ,Update_Game,Input mathods .
 class Main : protected Fruit {
     public : 
         void Main_Board(string name) { 
-            system("cls");
+            system(CLEAR);
             
             for(int i=0; i<this->width+2; i++) {
                 cout << "-";
@@ -117,6 +165,11 @@ class Main : protected Fruit {
         }
         
         void Update_Game(){
+
+            if(Dir == STOP) {
+                return;
+            }
+
             int preX = Tail_X[0];
             int preY = Tail_Y[0];
 
@@ -211,8 +264,9 @@ int main() {
     
     string name;
     cout << "Enter your Name : ";
-    cin >> name;
-    // Set Difficuly of the game .
+    getline(cin, name);
+
+    // Set Difficuly of the game.
     int diff = 0;
     cout << endl;
     cout << "Difficulty Levels : " << endl;
@@ -243,11 +297,17 @@ int main() {
             game.Input();
             // Backend Part of the game 
             game.Update_Game();
-        
-            Sleep(diff);
+
+
+            #if defined(_WIN32) || defined(_WIN64)
+                Sleep(diff);
+            #else
+                usleep(diff * 1000);
+            #endif
+
         }
         
-        system("cls");
+        system(CLEAR);
 
         cout << "\n\n\n\n\n                                   ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
@@ -260,7 +320,8 @@ int main() {
 
     } while(play == 1);
 
-    cout << "\n\n\n\n\nOkay, Byee...\n\n\n\n\n";
+    cout << "\n\n\n\n\nOkay, Byee...  ";
+    cout << "Thank You " << name << "\n\n\n\n\n\n";
 
     return 0;
 }
