@@ -303,7 +303,7 @@ int main() {
             #if defined(_WIN32) || defined(_WIN64)
                 Sleep(diff);
             #else
-                usleep(diff * 1000);
+                usleep(diff * 900);
             #endif
 
         }
