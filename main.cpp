@@ -75,6 +75,10 @@ class Fruit : protected Snake {
         
 };   
 
+/*
+It is the main body of the Game.
+In this we have Main_Board ,Update_Game,Input mathods .
+*/
 class Main : protected Fruit {
     public : 
         void Main_Board(string name) { 
@@ -200,13 +204,15 @@ class Main : protected Fruit {
         }
 };
 
-
+/*
+main function of this cpp file. 
+*/
 int main() {
     
     string name;
     cout << "Enter your Name : ";
     cin >> name;
-
+    // Set Difficuly of the game .
     int diff = 0;
     cout << endl;
     cout << "Difficulty Levels : " << endl;
@@ -226,14 +232,16 @@ int main() {
     }
 
     int play = 0;
-
+    // this is the do-while loop for if you want to play again the game 
     do {
         Main game;
-    
+        // main part of methods calling 
         while(!game.isOver()){
-        
+            // Frontend of the game board
             game.Main_Board(name);
+            // Keys press  
             game.Input();
+            // Backend Part of the game 
             game.Update_Game();
         
             Sleep(diff);
