@@ -10,14 +10,14 @@ enum direction {
 };
 
 /*
-We use encapsulation to make our variables private and ensure data security. Additionally, we implement inheritance to establish relationships between classes.
+We have used encapsulation to make our variables private and ensure data security. Additionally, we have implemented inheritance to establish relationships between classes.
 
 At the starting point, all constructors will be called, initializing and allocating the necessary resources for the game.
 */
 
 // Main game base
 class Game { 
-    // Here Encapsulation . we Protect variables members . 
+    // Here in Encapsulation, we Protect variable members . 
     protected : 
         int width;
         int height;
@@ -27,7 +27,7 @@ class Game {
     
     public : 
         /*
-        First this will be called After creation of class
+        First of all this will be called After creation of class
         */
 
         Game() {
@@ -39,7 +39,7 @@ class Game {
         }
 };
 
-// This is the class inherite from Game calss 
+// This is the class inherited from Game class
 class Snake : protected Game {
     protected : 
         int snakeX, snakeY;
@@ -49,7 +49,7 @@ class Snake : protected Game {
         
     public : 
         /*
-        In Second this will be called
+        Second time this will be called
         */
         Snake() {
             this->snakeX = this->width / 2;
@@ -67,7 +67,7 @@ class Fruit : protected Snake {
         int fruitX, fruitY;
     
     public : 
-        //In Third, this will be called
+        //Third time, this will be called
         Fruit() { 
             this->fruitX = rand() % (this->width-1);
             this->fruitY = rand() % (this->height-1);
