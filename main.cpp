@@ -6,6 +6,7 @@
     #include <conio.h>
     #include <windows.h>
     #define CLEAR "cls"
+    
 #else 
     #include <termios.h>
     #include <unistd.h>
@@ -118,6 +119,7 @@ class Fruit : protected Snake {
     public : 
         //Third time, this will be called
         Fruit() { 
+            srand(time(NULL));
             this->fruitX = rand() % (this->width-1);
             this->fruitY = rand() % (this->height-1);
         }
@@ -209,7 +211,8 @@ class Main : protected Fruit {
                     isGameOver = true;
                 }
             }
-
+            
+            srand(time(NULL));
             if(snakeX == fruitX && snakeY == fruitY) {
                 score += 10;
                 Tail_Length++;
