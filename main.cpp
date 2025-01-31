@@ -89,13 +89,12 @@ class Game {
 };
 
 // This is the class inherited from Game class
-class Snake : protected Game {
+class Snake :protected Game {
     protected : 
         int snakeX, snakeY;
         int *Tail_X;
         int *Tail_Y;
         int Tail_Length;
-        
     public : 
         /*
         Second time this will be called
@@ -103,6 +102,7 @@ class Snake : protected Game {
         Snake() {
             this->snakeX = this->width / 2;
             this->snakeY = this->height / 2;
+            // Dynamic allocation of tail of shake 
             Tail_X = new int[100];
             Tail_Y = new int[100];
             Tail_Length = 0;
