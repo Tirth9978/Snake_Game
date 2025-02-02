@@ -212,7 +212,6 @@ class Main : protected Fruit {
                 }
             }
             
-            srand(time(NULL));
             if(snakeX == fruitX && snakeY == fruitY) {
                 score += 10;
                 Tail_Length++;
@@ -288,6 +287,8 @@ int main() {
     } else {
         diff = 150;
     }
+
+    srand(time(NULL));
 
     int play = 0;
     // this is the do-while loop for if you want to play again the game 
