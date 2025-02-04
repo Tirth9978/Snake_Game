@@ -274,6 +274,18 @@ class Main : protected Fruit {
         void Input() { 
             if(_kbhit()) {
                 char ch = _getch();
+
+                if (ch == 'p') {  // Pause the game
+                    cout << "\n\n\t\tGame Paused! Press 'r' to Resume.\n\n";
+                    while (true) {
+                        if (_kbhit() && _getch() == 'r') {
+                            cout << "Game Resumed!\n";
+                            break;
+                        }
+                    }
+                    return;
+                }
+
                 if(ch == 'a' && Dir != RIGHT) {
                     Dir = LEFT;
                 } else if(ch == 's' && Dir != UP) {
@@ -282,10 +294,26 @@ class Main : protected Fruit {
                     Dir = UP;
                 } else if(ch == 'd' && Dir != LEFT) {
                     Dir = RIGHT;
+                } else if(ch == 'x') {
+                    this->Reset();
                 } else if(ch == 27) {
                     isGameOver = true;
                 }
             }
+        }
+
+        void Reset() {
+            this->score = 0;
+            this->isGameOver = false;
+            this->Dir = STOP;
+            this->snakeX = width / 2;
+            this->snakeY = height / 2;
+            Tail_Length = 0;
+
+            // Generate new fruit
+            fruitX = rand() % (width-1);
+            fruitY = rand() % (height-1);
+            specialFruit = (rand() % 10 == 0);
         }
         
         bool isOver() {
