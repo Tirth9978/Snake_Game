@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
 
@@ -53,7 +54,6 @@
 
 using namespace std;
 
-
 // ENUM Part
 enum direction { 
     STOP = 0, LEFT, RIGHT, UP, DOWN
@@ -74,6 +74,7 @@ class Game {
         int score;
         bool isGameOver;
         direction Dir;
+        vector<pair<int, int>> obstacles;
     
     public : 
         /*
@@ -108,6 +109,11 @@ class Snake :protected Game {
             Tail_Y = new int[100];
             Tail_Length = 0;
         }
+
+        ~Snake() {
+            delete[] Tail_X;
+            delete[] Tail_Y;
+        }
     
 };
 
@@ -119,6 +125,10 @@ class Fruit : protected Snake {
     public : 
         //Third time, this will be called
         Fruit() { 
+            generateFruit();
+        }
+
+        void generateFruit() {
             this->fruitX = 1 + rand() % (this->width - 2);
             this->fruitY = 1 + rand() % (this->height - 2);
             this->specialFruit = (bool)(rand() % 10 == 0);
@@ -130,13 +140,52 @@ It is the main body of the Game.
 In this we have Main_Board ,Update_Game,Input mathods .
 */
 class Main : protected Fruit {
-    public : 
+    private :
+        vector<pair<int, int>> obstacles;
+        int frameCount = 0;
+        bool obstaclesEnable = false;
+
+    public :
+
+        void GenerateObstacles() {
+            if(!obstaclesEnable) {
+                return;
+            }
+
+            obstacles.clear();  // Reset old obstacles
+            int numObstacles = 5 + ((score - 50) / 20) * 2;
+
+            for (int i = 0; i < numObstacles; i++) {
+                int obsX, obsY;
+                bool valid;
+                do {
+                    valid = true;
+                    obsX = 2 + rand() % (width - 2);
+                    obsY = 2 + rand() % (height - 2);
+
+                    if (obsX == snakeX && obsY == snakeY) {
+                        valid = false;
+                    }
+                    if (obsX == fruitX && obsY == fruitY) {
+                        valid = false;
+                    }
+
+                    for (auto t : obstacles) {
+                        if (t.first == obsX && t.second == obsY) valid = false;
+                    }
+
+                } while (!valid);
+
+                obstacles.push_back({obsX, obsY});
+            }
+        }
+
         void Main_Board(string name) { 
             system(CLEAR);
             
             for(int i=0; i<this->width+2; i++) {
                 cout << "-";
-            } cout << endl;
+            } cout << "\n";
             
             for(int i=1; i<height; i++) {
                 for(int j=0; j<=width+1; j++) {
@@ -158,27 +207,44 @@ class Main : protected Fruit {
                                 find = true;
                             }
                         }
-                        if(!find) cout << " ";
+                        if(!find) {
+                            bool isObstacle = false;
+                            for (auto obs : obstacles) {
+                                if (obs.first == j && obs.second == i) {
+                                    cout << "#";  // Draw obstacle
+                                    isObstacle = true;
+                                    break;
+                                }
+                            }
+                            if (!isObstacle) cout << " ";
+                        }
                     }
                 }
+                if(i == 2) cout << "       ---------- Legend ----------";
+                if(i == 4) cout << "       @ = Normal Fruit (5 points)";
+                if(i == 5) cout << "       $ = Special Fruit (20 points)";
+                if(i == 6) cout << "       # = Obstacles (Be Safe!)";
+                if(i == 7) cout << "       O = Snake Head | o = Snake Tail";
+                if(i == 10) cout << "       ---------- Controls ----------";
+                if(i == 12) cout << "       W / A / S / D or Arrow Keys = Move";
+                if(i == 13) cout << "       P = Pause | R = Resume";
+                if(i == 14) cout << "       X = Reset | ESC = Exit";
+
+                if(i == 18) cout << "       " << name << "'s Score : " << this->score;
+
                 cout << endl;
             }
+
             for(int i=0; i<=width+1; i++) {
                 cout << "-";
             }
-            cout << endl << endl;
-            // Display Player Score
-            cout << name << "'s Score : " << this->score << endl;
+            cout << "\n\n";
 
-            // Display Controls
-            cout << "\n";
-            cout << "-------------------- Controls --------------------\n";
-            cout << "W = Up    | S = Down   | A = Left   | D = Right  \n";
-            cout << "P = Pause | R = Resume | X = Reset  | ESC = Exit\n";
-            cout << "--------------------------------------------------\n";
         }
         
         void Update_Game(int diff, int wallsEnable){
+
+            frameCount++;
 
             if(Dir == STOP) {
                 return;
@@ -232,6 +298,21 @@ class Main : protected Fruit {
                 }
             }
 
+            if (score >= 50 && !obstaclesEnable) {
+                obstaclesEnable = true;
+                GenerateObstacles();
+            }
+
+            if (obstaclesEnable && frameCount % 100 == 0) {
+                GenerateObstacles();
+            }
+
+            for (auto obs : obstacles) {
+                if (snakeX == obs.first && snakeY == obs.second) {
+                    isGameOver = true;  // Snake dies if it hits an obstacle
+                }
+            }
+
             for(int i=0; i<Tail_Length; i++) {
                 if(Tail_X[i] == snakeX && Tail_Y[i] == snakeY) {
                     isGameOver = true;
@@ -251,9 +332,7 @@ class Main : protected Fruit {
                 do {
                     find = true;
 
-                    fruitX = 1 + rand() % (width - 2);
-                    fruitY = 1 + rand() % (height - 2);
-                    specialFruit = (bool)(rand() % 10 == 0);
+                    generateFruit();
 
                     if (snakeX == fruitX && snakeY == fruitY) {
                         find = false;
@@ -267,18 +346,21 @@ class Main : protected Fruit {
                     }
 
                 } while(!find);
-
             }
 
             if(score % 25 == 0) {
                 diff -= 5;  // Increase Speed
             }
-
         }
         
         void Input() { 
             if(_kbhit()) {
                 char ch = _getch();
+
+                if(ch == 27) {
+                    isGameOver = true;
+                    return;
+                }
 
                 if (ch == 'p') {  // Pause the game
                     cout << "\n\n\t\tGame Paused! Press 'r' to Resume.\n\n";
@@ -291,18 +373,19 @@ class Main : protected Fruit {
                     return;
                 }
 
-                if(ch == 'a' && Dir != RIGHT) {
-                    Dir = LEFT;
-                } else if(ch == 's' && Dir != UP) {
-                    Dir = DOWN;
-                } else if(ch == 'w' && Dir != DOWN) {
-                    Dir = UP;
-                } else if(ch == 'd' && Dir != LEFT) {
-                    Dir = RIGHT;
-                } else if(ch == 'x') {
+                if(ch == 'x') {
                     this->Reset();
-                } else if(ch == 27) {
-                    isGameOver = true;
+                    return;
+                }
+
+                if(ch == 'a' || ch == 75) {
+                    if(Dir != RIGHT) Dir = LEFT;
+                } else if(ch == 's' || ch == 80) {
+                    if(Dir != UP) Dir = DOWN;
+                } else if(ch == 'w' || ch == 72) {
+                    if(Dir != DOWN) Dir = UP;
+                } else if(ch == 'd' || ch == 77) {
+                    if(Dir != LEFT) Dir = RIGHT;
                 }
             }
         }
@@ -344,6 +427,7 @@ void animation(string name) {
             usleep(650 * 1000);
         #endif
     }
+
     system(CLEAR);
 }
 
@@ -368,7 +452,7 @@ int main() {
     cout << "\n\n";
     cout << "Difficulty Levels : " << endl;
     cout << "1. Easy\n2. Medium\n3. Hard\n\n";
-    cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n";
+    cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n\n";
     cout << "Set Difficulty Level : ";
     cin >> diff;
     
@@ -393,7 +477,7 @@ int main() {
         cout <<"\n\n";
 
         int wallsEnable = 1;
-        cout << "Do You Want To Walls enable..?\n\n";
+        cout << "Do You Want To Enable The Walls..?\n\n";
         cout << "NOTE : if Walls are Enable then if you touch the walls, The game is Over..\n";
         cout << "If You Press other than 1 or 0 then it will take 1 and walls are enabled automatically..\n\n";
         cout << "Press 1 for Walls Enable and 0 for not enable : ";
@@ -412,9 +496,9 @@ int main() {
             game.Update_Game(diff, wallsEnable);
 
             #if defined(_WIN32) || defined(_WIN64)
-                Sleep(diff);
+                Sleep(max(50, diff));
             #else
-                usleep(diff * 900);
+                usleep(max(50, diff) * 900);
             #endif
 
         }
@@ -443,7 +527,7 @@ int main() {
     } while(play == 1);
 
     cout << "\n\n\n\n\nOkay, Byee...  ";
-    cout << "Thank You " << name << "For Playing Our Game..!!\n\n\n\n\n\n";
+    cout << "Thank You " << name << " For Playing Our Game..!!\n\n\n\n";
 
     return 0;
 }
