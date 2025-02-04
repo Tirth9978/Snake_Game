@@ -119,8 +119,8 @@ class Fruit : protected Snake {
     public : 
         //Third time, this will be called
         Fruit() { 
-            this->fruitX = rand() % (this->width-1);
-            this->fruitY = rand() % (this->height-1);
+            this->fruitX = 1 + rand() % (this->width - 2);
+            this->fruitY = 1 + rand() % (this->height - 2);
             this->specialFruit = (bool)(rand() % 10 == 0);
         }
 };   
@@ -167,7 +167,15 @@ class Main : protected Fruit {
                 cout << "-";
             }
             cout << endl << endl;
-            cout << name << "'s Score : " << this->score <<endl;
+            // Display Player Score
+            cout << name << "'s Score : " << this->score << endl;
+
+            // Display Controls
+            cout << "\n";
+            cout << "-------------------- Controls --------------------\n";
+            cout << "W = Up    | S = Down   | A = Left   | D = Right  \n";
+            cout << "P = Pause | R = Resume | X = Reset  | ESC = Exit\n";
+            cout << "--------------------------------------------------\n";
         }
         
         void Update_Game(int diff, int wallsEnable){
@@ -233,20 +241,18 @@ class Main : protected Fruit {
             if(snakeX == fruitX && snakeY == fruitY) {
                 if(specialFruit) {
                     score += 20;
-                    diff -= 5; // Increase speed
                 } else {
                     score += 5;
                 }
                 Tail_Length++;
 
                 bool find;
-                int attempts = 0;
 
                 do {
                     find = true;
 
-                    fruitX = rand() % (width-1);
-                    fruitY = rand() % (height-1);
+                    fruitX = 1 + rand() % (width - 2);
+                    fruitY = 1 + rand() % (height - 2);
                     specialFruit = (bool)(rand() % 10 == 0);
 
                     if (snakeX == fruitX && snakeY == fruitY) {
@@ -260,15 +266,14 @@ class Main : protected Fruit {
                         }
                     }
 
-                    attempts++;
+                } while(!find);
 
-                } while(!find && attempts < 100);
-
-                if(!find) {
-                    fruitX = 1 + rand() % (width - 2);
-                    fruitY = 1 + rand() % (height - 2);
-                }
             }
+
+            if(score % 25 == 0) {
+                diff -= 5;  // Increase Speed
+            }
+
         }
         
         void Input() { 
@@ -324,12 +329,12 @@ class Main : protected Fruit {
 void animation(string name) {
     system(CLEAR);
     cout << "\n\n\n";
-    cout << "          ****************************************\n\n";
-    cout << "                       S N A K E  G A M E\n\n";
-    cout << "                         Welcome, " << name << "\n\n";
-    cout << "          ****************************************\n\n\n\n\n";
+    cout << "          ***************************************************************\n\n";
+    cout << "                                 S N A K E  G A M E\n\n";
+    cout << "                                   Welcome, " << name << "\n\n";
+    cout << "          ***************************************************************\n\n\n\n\n";
 
-    cout << "                     L O A D I N G";
+    cout << "                               L O A D I N G";
     for (int i = 0; i < 5; i++) {
         cout << ".";
         #if defined(_WIN32) || defined(_WIN64)
@@ -347,7 +352,7 @@ main function of this cpp file.
 int main() {
     
     string name;
-    cout << "Enter your Name : ";
+    cout << "\n\nEnter your Name : ";
     getline(cin, name);
 
     animation(name);
@@ -362,13 +367,13 @@ int main() {
     cin >> diff;
     
     if (diff == 3) {
-        diff = 100;
+        diff = 90;
     } else if(diff == 2) {
-        diff = 150;
+        diff = 140;
     } else if(diff == 1) {
-        diff = 200;
+        diff = 190;
     } else {
-        diff = 150;
+        diff = 140;
     }
 
     srand(time(NULL));
