@@ -104,6 +104,7 @@ The game is implemented using Object-Oriented Programming (OOP) principles:
 
 ## Future Enhancements
 - Implementing **multiple levels** with increasing complexity.
+- We can add **Multiplayer Mode** where two player can play where both player have their snakes
 - Adding a **high score tracking system**.
 - Introducing **AI-controlled snakes** as opponents.
 - Creating a **GUI-based version** using a graphics library.
