@@ -331,10 +331,11 @@ void animation(string name) {
     cout << "\n\n\n";
     cout << "          ***************************************************************\n\n";
     cout << "                                 S N A K E  G A M E\n\n";
-    cout << "                                   Welcome, " << name << "\n\n";
+    cout << "                                 Get Ready, " << name << "..!!\n\n";
     cout << "          ***************************************************************\n\n\n\n\n";
 
-    cout << "                               L O A D I N G";
+    cout << "                               L O A D I N G ";
+    
     for (int i = 0; i < 5; i++) {
         cout << ".";
         #if defined(_WIN32) || defined(_WIN64)
@@ -350,16 +351,21 @@ void animation(string name) {
 main function of this cpp file. 
 */
 int main() {
+
+    system(CLEAR);
+
+    cout << "\n\n\n";
+    cout << "          **************************************************************************************\n\n";
+    cout << "                                 W E L C O M E  T O  S N A K E  G A M E ! !\n\n";
+    cout << "          **************************************************************************************\n\n\n\n";
     
     string name;
     cout << "\n\nEnter your Name : ";
     getline(cin, name);
 
-    animation(name);
-
     // Set Difficuly of the game.
     int diff = 0;
-    cout << "\n\n\n\n";
+    cout << "\n\n";
     cout << "Difficulty Levels : " << endl;
     cout << "1. Easy\n2. Medium\n3. Hard\n\n";
     cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n";
@@ -382,16 +388,18 @@ int main() {
     // this is the do-while loop for if you want to play again the game 
     do {
 
-        system(CLEAR);
+        // system(CLEAR);
         
-        cout <<"\n\n\n\n";
+        cout <<"\n\n";
 
         int wallsEnable = 1;
         cout << "Do You Want To Walls enable..?\n\n";
         cout << "NOTE : if Walls are Enable then if you touch the walls, The game is Over..\n";
         cout << "If You Press other than 1 or 0 then it will take 1 and walls are enabled automatically..\n\n";
-        cout << "Press 1 for Walls Enable and 0 for not enable : \n";
-        cin >> wallsEnable; 
+        cout << "Press 1 for Walls Enable and 0 for not enable : ";
+        cin >> wallsEnable;
+
+        animation(name); 
 
         Main game;
         // main part of methods calling 
@@ -403,7 +411,6 @@ int main() {
             // Backend Part of the game 
             game.Update_Game(diff, wallsEnable);
 
-
             #if defined(_WIN32) || defined(_WIN64)
                 Sleep(diff);
             #else
@@ -414,7 +421,17 @@ int main() {
         
         system(CLEAR);
 
-        cout << "\n\n\n\n\n                                   ";
+        cout << "\n\n\n";
+        cout << R"(
+                              _____                         ____                 
+                             / ____|                       / __ \                
+                            | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __ 
+                            | | |_ |/ _` | '_ ` _ \ / _ \ | |  | \ \ / / _ \ '__|
+                            | |__| | (_| | | | | | |  __/ | |__| |\ V /  __/ |   
+                             \_____|\__,_|_| |_| |_|\___|  \____/  \_/ \___|_|   
+        )" << "\n\n\n\n\n";
+
+        cout << "                                        ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
 
         cout << "\n\nDo You Want To Play Again..?\n\n";
@@ -426,7 +443,7 @@ int main() {
     } while(play == 1);
 
     cout << "\n\n\n\n\nOkay, Byee...  ";
-    cout << "Thank You " << name << "\n\n\n\n\n\n";
+    cout << "Thank You " << name << "For Playing Our Game..!!\n\n\n\n\n\n";
 
     return 0;
 }
