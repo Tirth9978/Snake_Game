@@ -119,10 +119,9 @@ class Fruit : protected Snake {
     public : 
         //Third time, this will be called
         Fruit() { 
-            srand(time(NULL));
             this->fruitX = rand() % (this->width-1);
             this->fruitY = rand() % (this->height-1);
-            this->specialFruit = (bool)(rand() % 20 == 0);
+            this->specialFruit = (bool)(rand() % 10 == 0);
         }
 };   
 
@@ -171,7 +170,7 @@ class Main : protected Fruit {
             cout << name << "'s Score : " << this->score <<endl;
         }
         
-        void Update_Game(int diff){
+        void Update_Game(int diff, int wallsEnable){
 
             if(Dir == STOP) {
                 return;
@@ -206,8 +205,23 @@ class Main : protected Fruit {
                 snakeY++;
             }
 
-            if(snakeX >= width || snakeX <= 0 || snakeY >= height || snakeY <= 0) {
-                isGameOver = true;
+            if(wallsEnable) {
+                if(snakeX >= width || snakeX <= 0 || snakeY >= height || snakeY <= 0) {
+                    isGameOver = true;
+                }   
+            } else {
+                if(snakeX >= width) {
+                    snakeX = 1;
+                }
+                else if(snakeX <= 0) {
+                    snakeX = width - 1;
+                }
+                else if(snakeY >= height) {
+                    snakeY = 1;
+                }
+                else if(snakeY <= 0) {
+                    snakeY = height - 1;
+                }
             }
 
             for(int i=0; i<Tail_Length; i++) {
@@ -226,13 +240,14 @@ class Main : protected Fruit {
                 Tail_Length++;
 
                 bool find;
+                int attempts = 0;
 
                 do {
                     find = true;
 
                     fruitX = rand() % (width-1);
                     fruitY = rand() % (height-1);
-                    specialFruit = (bool)(rand() % 20 == 0);
+                    specialFruit = (bool)(rand() % 10 == 0);
 
                     if (snakeX == fruitX && snakeY == fruitY) {
                         find = false;
@@ -244,7 +259,15 @@ class Main : protected Fruit {
                             break;
                         }
                     }
-                } while(!find);
+
+                    attempts++;
+
+                } while(!find && attempts < 100);
+
+                if(!find) {
+                    fruitX = 1 + rand() % (width - 2);
+                    fruitY = 1 + rand() % (height - 2);
+                }
             }
         }
         
@@ -303,7 +326,7 @@ int main() {
 
     // Set Difficuly of the game.
     int diff = 0;
-    cout << endl;
+    cout << "\n\n\n\n";
     cout << "Difficulty Levels : " << endl;
     cout << "1. Easy\n2. Medium\n3. Hard\n\n";
     cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n";
@@ -326,6 +349,17 @@ int main() {
     // this is the do-while loop for if you want to play again the game 
     do {
 
+        system(CLEAR);
+        
+        cout <<"\n\n\n\n";
+
+        int wallsEnable = 1;
+        cout << "Do You Want To Walls enable..?\n\n";
+        cout << "NOTE : if Walls are Enable then if you touch the walls, The game is Over..\n";
+        cout << "If You Press other than 1 or 0 then it will take 1 and walls are enabled automatically..\n\n";
+        cout << "Press 1 for Walls Enable and 0 for not enable : \n";
+        cin >> wallsEnable; 
+
         Main game;
         // main part of methods calling 
         while(!game.isOver()){
@@ -334,7 +368,7 @@ int main() {
             // Keys press  
             game.Input();
             // Backend Part of the game 
-            game.Update_Game(diff);
+            game.Update_Game(diff, wallsEnable);
 
 
             #if defined(_WIN32) || defined(_WIN64)
