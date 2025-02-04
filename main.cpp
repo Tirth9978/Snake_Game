@@ -46,6 +46,18 @@
         newt.c_lflag &= ~(ICANON | ECHO);
         tcsetattr(STDIN_FILENO, TCSANOW, &newt);
         ch = getchar();
+
+        if (ch == 27) {
+            if (getchar() == '[') {
+                switch (getchar()) {
+                    case 'A': ch = 'w'; break;  // Up Arrow
+                    case 'B': ch = 's'; break;  // Down Arrow
+                    case 'C': ch = 'd'; break;  // Right Arrow
+                    case 'D': ch = 'a'; break;  // Left Arrow
+                }
+            }
+        }
+
         tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
         return ch;
     }
@@ -153,7 +165,7 @@ class Main : protected Fruit {
             }
 
             obstacles.clear();  // Reset old obstacles
-            int numObstacles = 5 + ((score - 50) / 20) * 2;
+            int numObstacles = 5 + ((score - 50) / 20) * 3;
 
             for (int i = 0; i < numObstacles; i++) {
                 int obsX, obsY;
@@ -422,7 +434,7 @@ void animation(string name) {
     cout << "                                    L O A D I N G ";
     
     for (int i = 0; i < 5; i++) {
-        cout << ".";
+        cout << "." << flush;
         #if defined(_WIN32) || defined(_WIN64)
             Sleep(600);
         #else
