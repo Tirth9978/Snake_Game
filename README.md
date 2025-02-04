@@ -111,7 +111,9 @@ The game is implemented using Object-Oriented Programming (OOP) principles:
 ---
 
 ### Contributors
-- Your Name
+- Tirth Patel
+- Raj Patel
+- Shlok Patel
+- Prakriti Panday
 
-### License
-This project is licensed under the MIT License.
+
