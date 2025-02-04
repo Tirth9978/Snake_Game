@@ -191,7 +191,7 @@ class Main : protected Fruit {
                 preX = preXX;
                 preY = preYY;
             }
-
+            
             if(Dir == LEFT) {
                 snakeX--;
             } else if(Dir == RIGHT) {
@@ -260,6 +260,26 @@ class Main : protected Fruit {
         }
 };
 
+void animation(string name) {
+    system(CLEAR);
+    cout << "\n\n\n";
+    cout << "          ****************************************\n\n";
+    cout << "                       S N A K E  G A M E\n\n";
+    cout << "                         Welcome, " << name << "\n\n";
+    cout << "          ****************************************\n\n\n";
+
+    cout << "                     L O A D I N G";
+    for (int i = 0; i < 5; i++) {
+        cout << ".";
+        #if defined(_WIN32) || defined(_WIN64)
+            Sleep(600);
+        #else
+            usleep(650 * 1000);
+        #endif
+    }
+    system(CLEAR);
+}
+
 /*
 main function of this cpp file. 
 */
@@ -268,6 +288,8 @@ int main() {
     string name;
     cout << "Enter your Name : ";
     getline(cin, name);
+
+    animation(name);
 
     // Set Difficuly of the game.
     int diff = 0;
