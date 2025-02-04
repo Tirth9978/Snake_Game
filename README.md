@@ -28,24 +28,24 @@ This project is a console-based Snake Game implemented in C++. It follows an obj
 ## ⚙️ Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/snake-game.git
+   git clone https://github.com/Tirth9978/Snake_Game.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd snake-game
+   cd Snake_Game
    ```
 3. Compile the code using g++ (for Linux/macOS):
    ```sh
-   g++ -o snake_game snake_game.cpp
+   g++ -o main main.cpp
    ```
    For Windows (using MinGW):
    ```sh
-   g++ -o snake_game.exe snake_game.cpp
+   g++ -o main.exe main.cpp
    ```
 4. Run the executable:
    ```sh
-   ./snake_game  # (Linux/macOS)
-   snake_game.exe  # (Windows)
+   ./main  # (Linux/macOS)
+   main.exe  # (Windows)
    ```
 
 ## 🎮 How to Play
