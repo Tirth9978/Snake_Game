@@ -6,7 +6,7 @@
     #include <conio.h>
     #include <windows.h>
     #define CLEAR "cls"
-    
+
 #else 
     #include <termios.h>
     #include <unistd.h>
@@ -115,15 +115,15 @@ class Snake :protected Game {
 class Fruit : protected Snake { 
     protected : 
         int fruitX, fruitY;
-    
+        bool specialFruit;
     public : 
         //Third time, this will be called
         Fruit() { 
             srand(time(NULL));
             this->fruitX = rand() % (this->width-1);
             this->fruitY = rand() % (this->height-1);
+            this->specialFruit = (bool)(rand() % 20 == 0);
         }
-        
 };   
 
 /*
@@ -146,7 +146,11 @@ class Main : protected Fruit {
                     } else if(j == snakeX && i == snakeY) {
                         cout << "O";
                     } else if(j == fruitX && i == fruitY) {
-                        cout << "@";
+                        if(specialFruit) {
+                            cout << "$";
+                        } else {
+                            cout << "@";
+                        }
                     } else {
                         bool find = false;
                         for(int k=0; k<Tail_Length; k++) {
@@ -167,7 +171,7 @@ class Main : protected Fruit {
             cout << name << "'s Score : " << this->score <<endl;
         }
         
-        void Update_Game(){
+        void Update_Game(int diff){
 
             if(Dir == STOP) {
                 return;
@@ -213,7 +217,12 @@ class Main : protected Fruit {
             }
             
             if(snakeX == fruitX && snakeY == fruitY) {
-                score += 10;
+                if(specialFruit) {
+                    score += 20;
+                    diff -= 5; // Increase speed
+                } else {
+                    score += 5;
+                }
                 Tail_Length++;
 
                 bool find;
@@ -223,6 +232,7 @@ class Main : protected Fruit {
 
                     fruitX = rand() % (width-1);
                     fruitY = rand() % (height-1);
+                    specialFruit = (bool)(rand() % 20 == 0);
 
                     if (snakeX == fruitX && snakeY == fruitY) {
                         find = false;
@@ -266,7 +276,7 @@ void animation(string name) {
     cout << "          ****************************************\n\n";
     cout << "                       S N A K E  G A M E\n\n";
     cout << "                         Welcome, " << name << "\n\n";
-    cout << "          ****************************************\n\n\n";
+    cout << "          ****************************************\n\n\n\n\n";
 
     cout << "                     L O A D I N G";
     for (int i = 0; i < 5; i++) {
@@ -315,6 +325,7 @@ int main() {
     int play = 0;
     // this is the do-while loop for if you want to play again the game 
     do {
+
         Main game;
         // main part of methods calling 
         while(!game.isOver()){
@@ -323,7 +334,7 @@ int main() {
             // Keys press  
             game.Input();
             // Backend Part of the game 
-            game.Update_Game();
+            game.Update_Game(diff);
 
 
             #if defined(_WIN32) || defined(_WIN64)
