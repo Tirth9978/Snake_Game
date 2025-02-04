@@ -182,6 +182,8 @@ class Main : protected Fruit {
 
         void Main_Board(string name) { 
             system(CLEAR);
+
+            cout << "\n\n";
             
             for(int i=0; i<this->width+2; i++) {
                 cout << "-";
@@ -349,7 +351,7 @@ class Main : protected Fruit {
             }
 
             if(score % 25 == 0) {
-                diff -= 5;  // Increase Speed
+                diff -= 10;  // Increase Speed
             }
         }
         
@@ -363,7 +365,7 @@ class Main : protected Fruit {
                 }
 
                 if (ch == 'p') {  // Pause the game
-                    cout << "\n\n\t\tGame Paused! Press 'r' to Resume.\n\n";
+                    cout << "\n\n\t\tGame Paused..!! Press 'r' to Resume...\n\n";
                     while (true) {
                         if (_kbhit() && _getch() == 'r') {
                             cout << "Game Resumed!\n";
@@ -412,12 +414,12 @@ class Main : protected Fruit {
 void animation(string name) {
     system(CLEAR);
     cout << "\n\n\n";
-    cout << "          ***************************************************************\n\n";
-    cout << "                                 S N A K E  G A M E\n\n";
-    cout << "                                 Get Ready, " << name << "..!!\n\n";
-    cout << "          ***************************************************************\n\n\n\n\n";
+    cout << "          *************************************************************************\n\n";
+    cout << "                                      S N A K E  G A M E\n\n";
+    cout << "                                      Get Ready, " << name << "..!!\n\n";
+    cout << "          *************************************************************************\n\n\n\n\n\n\n";
 
-    cout << "                               L O A D I N G ";
+    cout << "                                    L O A D I N G ";
     
     for (int i = 0; i < 5; i++) {
         cout << ".";
