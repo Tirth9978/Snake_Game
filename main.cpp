@@ -417,12 +417,11 @@ class Main : protected Fruit {
             fruitY = rand() % (height-1);
             specialFruit = (rand() % 10 == 0);
         }
-        
-        bool isOver() {
-            return this->isGameOver;
-        }
-};
 
+
+        bool isOver() {return this->isGameOver;}
+};
+// Loading Animation part 
 void animation(string name) {
     system(CLEAR);
     cout << "\n\n\n";
@@ -438,7 +437,7 @@ void animation(string name) {
         #if defined(_WIN32) || defined(_WIN64)
             Sleep(600);
         #else
-            usleep(650 * 1000);
+             usleep(650 * 1000);
         #endif
     }
 
