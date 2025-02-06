@@ -424,6 +424,7 @@ class Main : protected Fruit {
 // Loading Animation part 
 void animation(string name) {
     system(CLEAR);
+
     cout << "\n\n\n";
     cout << "          *************************************************************************\n\n";
     cout << "                                      S N A K E  G A M E\n\n";
@@ -435,13 +436,61 @@ void animation(string name) {
     for (int i = 0; i < 5; i++) {
         cout << "." << flush;
         #if defined(_WIN32) || defined(_WIN64)
-            Sleep(600);
+            Sleep(700);
         #else
-             usleep(650 * 1000);
+             usleep(750 * 1000);
         #endif
     }
 
-    system(CLEAR);
+    for (int i = 3; i >= 0; i--) {
+        system(CLEAR);
+
+        cout << "\n\n\n\n\n";
+        cout << "\r                                    Starting in:\n\n\n";
+        if(i == 3) {
+            cout << R"(
+                                         ____
+                                        |___ \ 
+                                          __) |  
+                                         |__ <    
+                                         ___) |    
+                                        |____/     
+            )" << flush;
+        } else if(i == 2) {
+            cout << R"(
+                                        ______
+                                       / ____ \
+                                       \/   / /
+                                           / / 
+                                          / /___
+                                         /______| 
+            )" << flush;
+        } else if(i == 1) {
+            cout << R"(
+                                          _ 
+                                         / |
+                                         | |
+                                         | |
+                                         | |
+                                         |_|
+            )" << flush;
+        } else {
+            system(CLEAR);
+            cout << "\n\n\n\n\n\n" R"(
+                          _____   _______      __      _____     _______ 
+                         / ____| |_______|    /  \     |  __ \  |_______|
+                        | (___      | |      / _  \    | |__) |    | |
+                         \___ \     | |     / / \  \   |  _  /     | |
+                         ____) |    | |    /  ____  \  | | \ \     | |
+                        |_____/     |_|   /__/    \__\ |_|  \_\    |_|
+            )" << flush;
+        }
+        #if defined(_WIN32) || defined(_WIN64)
+            Sleep(900);
+        #else
+             usleep(950 * 1000);
+        #endif
+    }
 }
 
 /*
