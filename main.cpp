@@ -79,7 +79,7 @@ At the starting point, all constructors will be called, initializing and allocat
 
 // Main game base
 class Game { 
-    // Here in Encapsulation, we Protect variable members . 
+    // Here in Encapsulation, we Protected variable members . 
     protected : 
         int width;
         int height;
@@ -102,7 +102,7 @@ class Game {
         }
 };
 
-// This is the class inherited from Game class
+// This is the Snake class inherited from Game class
 class Snake :protected Game {
     protected : 
         int snakeX, snakeY;
@@ -149,32 +149,37 @@ class Fruit : protected Snake {
 
 /*
 It is the main body of the Game.
-In this we have Main_Board ,Update_Game,Input mathods .
+In this we have Main_Board, Update_Game, Input mathods .
 */
 class Main : protected Fruit {
     private :
+        // Data Structer to Store Obstacle's X and Y coordinates.
         vector<pair<int, int>> obstacles;
         int frameCount = 0;
         bool obstaclesEnable = false;
 
     public :
 
+        // This Method Generates Obstacles..
         void GenerateObstacles() {
             if(!obstaclesEnable) {
                 return;
             }
 
-            obstacles.clear();  // Reset old obstacles
-            int numObstacles = 5 + ((score - 50) / 20) * 3;
+            obstacles.clear();  // Clear Obstacles.
+            // initial Number of Obstacles is 5 (when score reaches at 50) then obstacles increase by 3 per 20 points.
+            int numObstacles = 5 + ((score - 50) / 20) * 3; 
 
             for (int i = 0; i < numObstacles; i++) {
                 int obsX, obsY;
                 bool valid;
                 do {
                     valid = true;
+                    // It Gives Random Coordinates to Obstacles.
                     obsX = 2 + rand() % (width - 2);
                     obsY = 2 + rand() % (height - 2);
 
+                    //Check Obstacles and Snake don't overlap.
                     if (obsX == snakeX && obsY == snakeY) {
                         valid = false;
                     }
@@ -272,6 +277,7 @@ class Main : protected Fruit {
             Tail_X[0] = snakeX;
             Tail_Y[0] = snakeY;
 
+            // Moving Snake..
             for(int i=1; i<Tail_Length; i++) {
                 preXX = Tail_X[i];
                 preYY = Tail_Y[i];
@@ -293,11 +299,12 @@ class Main : protected Fruit {
                 snakeY++;
             }
 
+
             if(wallsEnable) {
                 if(snakeX >= width || snakeX <= 0 || snakeY >= height || snakeY <= 0) {
                     isGameOver = true;
                 }   
-            } else {
+            } else { // Wall Are not Enable, so snake can pass through it.
                 if(snakeX >= width) {
                     snakeX = 1;
                 }
@@ -312,11 +319,13 @@ class Main : protected Fruit {
                 }
             }
 
+            // Score >= 50 then generate obstacles
             if (score >= 50 && !obstaclesEnable) {
                 obstaclesEnable = true;
                 GenerateObstacles();
             }
 
+            // Randomize Oblstacle's Coordinates every 10 second.
             if (obstaclesEnable && frameCount % 100 == 0) {
                 GenerateObstacles();
             }
@@ -329,13 +338,13 @@ class Main : protected Fruit {
 
             for(int i=0; i<Tail_Length; i++) {
                 if(Tail_X[i] == snakeX && Tail_Y[i] == snakeY) {
-                    isGameOver = true;
+                    isGameOver = true; // Snake Dies if it hits himself;
                 }
             }
             
             if(snakeX == fruitX && snakeY == fruitY) {
                 if(specialFruit) {
-                    score += 20;
+                    score += 20; // if snake eats Special Fruit then score increases by 20;
                 } else {
                     score += 5;
                 }
@@ -352,6 +361,7 @@ class Main : protected Fruit {
                         find = false;
                     }
 
+                    // Check Generated Fruit and Snake don't Overlap;
                     for(int i=0; i<Tail_Length; i++) {
                         if(Tail_X[i] == fruitX && Tail_Y[i] == fruitY) {
                             find = false;
@@ -371,12 +381,12 @@ class Main : protected Fruit {
             if(_kbhit()) {
                 char ch = _getch();
 
-                if(ch == 27) {
+                if(ch == 27) { // ESC to Exit..
                     isGameOver = true;
                     return;
                 }
 
-                if (ch == 'p') {  // Pause the game
+                if (ch == 'p') {  // p to Pause the game
                     cout << "\n\n\t\tGame Paused..!! Press 'r' to Resume...\n\n";
                     while (true) {
                         if (_kbhit() && _getch() == 'r') {
@@ -387,7 +397,7 @@ class Main : protected Fruit {
                     return;
                 }
 
-                if(ch == 'x') {
+                if(ch == 'x') { // x to Reset the Game;
                     this->Reset();
                     return;
                 }
@@ -404,6 +414,7 @@ class Main : protected Fruit {
             }
         }
 
+        // Reset The Game;
         void Reset() {
             this->score = 0;
             this->isGameOver = false;
@@ -421,6 +432,7 @@ class Main : protected Fruit {
 
         bool isOver() {return this->isGameOver;}
 };
+
 // Loading Animation part 
 void animation(string name) {
     system(CLEAR);
@@ -528,7 +540,7 @@ int main() {
         diff = 140;
     }
 
-    srand(time(NULL));
+    srand(time(NULL)); // Like Seed For rand() Function;
 
     int play = 0;
     // this is the do-while loop for if you want to play again the game 
