@@ -1,3 +1,18 @@
+/*
+
+IT206 Project 1 : Snake Game 
+
+This game is made by Bitwise Wizards . 
+
+Makers : 
+
+    Tirth Patel (202401157)
+    Raj Patel (202401152)
+    Shlok Patel (202401156)
+    Prakriti Panday (202401164)
+
+*/
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
