@@ -1,15 +1,16 @@
 # 🐍 Snake Game
 
 ## 📌 Table of Contents
-- [📖 Introduction](#introduction)
-- [✨ Features](#features)
-- [⚙️ Installation](#installation)
-- [🎮 How to Play](#how-to-play)
-- [🎯 Game Controls](#game-controls)
-- [🕹️ Game Mechanics](#game-mechanics)
-- [💡 Code Structure](#code-structure)
-- [📊 Data Structure Analysis](#data-structure-analysis)
-- [🚀 Future Enhancements](#future-enhancements)
+- [📖 Introduction](#📖-introduction)
+- [✨ Features](#✨-features)
+- [⚙️ Installation](#⚙️-installation)
+- [🎮 How to Play](#🎮-how-to-play)
+- [🎯 Game Controls](#🎯-game-controls)
+- [🕹️ Game Mechanics](#🕹️-game-mechanics)
+- [💡 Code Structure](#💡-code-structure)
+- [📊 Data Structure Analysis](#📊-data-structure-analysis)
+- [🚀 Future Enhancements](#🚀-future-enhancements)
+- [👥 Contributors](#👥-contributors)
 
 ---
 
@@ -111,7 +112,7 @@ The game is implemented using Object-Oriented Programming (OOP) principles:
 
 ---
 
-### 👥 Contributors
+## 👥 Contributors
 - 🏅 Tirth Patel
 - 🏅 Raj Patel
 - 🏅 Shlok Patel
