@@ -141,6 +141,6 @@ The game is implemented using **Object-Oriented Programming (OOP)** principles:
 
 ---
 
-Enjoy coding and improving your **Snake Game**! 🎮🐍
+
 
 
