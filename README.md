@@ -147,6 +147,6 @@ The game is implemented using **Object-Oriented Programming (OOP) principles**:
 - 🏅 Tirth Patel
 - 🏅 Raj Patel
 - 🏅 Shlok Patel
-- 🏅 Prakriti Panday
+- 🏅 Prakriti Pandey
 
 ---
