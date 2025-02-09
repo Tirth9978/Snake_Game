@@ -112,7 +112,7 @@ The game is implemented using Object-Oriented Programming (OOP) principles:
 
 ---
 
-## 👥 Contributors
+   ## 👥 Contributors
 - 🏅 Tirth Patel
 - 🏅 Raj Patel
 - 🏅 Shlok Patel
