@@ -1,4 +1,4 @@
----
+
 # 🐍 Snake Game
 
 ## 📌 Table of Contents
