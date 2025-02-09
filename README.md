@@ -15,7 +15,7 @@
 ---
 
 ## 📖 Introduction
-This project is a console-based Snake Game implemented in C++. It follows an object-oriented approach using classes and inheritance to manage game components like the snake, fruit, and game board.
+   This project is a console-based Snake Game implemented in C++. It follows an object-oriented approach using classes and inheritance to manage game components like the snake, fruit, and game board.
 
 ## ✨ Features
 - 🎯 Grid-based gameplay.
