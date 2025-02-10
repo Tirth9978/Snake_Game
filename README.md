@@ -144,9 +144,9 @@ The game is implemented using **Object-Oriented Programming (OOP) principles**:
 ---
 
 ## 👥 Contributors
-- 🏅 Tirth Patel
-- 🏅 Raj Patel
-- 🏅 Shlok Patel
-- 🏅 Prakriti Pandey
+- 🏅 Tirth Patel (202401157)
+- 🏅 Raj Patel (202401152)
+- 🏅 Shlok Patel (202401156)
+- 🏅 Prakriti Pandey (202401164)
 
 ---
