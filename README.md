@@ -34,23 +34,6 @@ This game is made by Bitwise Wizards.This project is a console-based Snake Game 
 
 ---
 
-## ⚙️ Installation
-```sh
-git clone https://github.com/Tirth9978/Snake_Game.git
-cd Snake_Game
-```
-For Linux/macOS:
-```sh
-g++ -o main main.cpp
-./main
-```
-For Windows (MinGW):
-```sh
-g++ -o main.exe main.cpp
-main.exe
-```
-
----
 
 ## 🎮 How to Play
 - Control the snake using `W, A, S, D` or arrow keys.
