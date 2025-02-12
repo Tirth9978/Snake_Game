@@ -399,36 +399,46 @@ class Main : protected Fruit {
         void Input() { 
             if(_kbhit()) {
                 char ch = _getch();
-
-                if(ch == 27) { // ESC to Exit..
-                    isGameOver = true;
-                    return;
-                }
-
-                if (ch == 'p') {  // p to Pause the game
-                    cout << "\n\n\t\tGame Paused..!! Press 'r' to Resume...\n\n";
-                    while (true) {
-                        if (_kbhit() && _getch() == 'r') {
-                            cout << "Game Resumed!\n";
-                            break;
-                        }
+                if (Dir != STOP){
+                    if(ch == 27) { // ESC to Exit..
+                        isGameOver = true;
+                        return;
                     }
-                    return;
-                }
 
-                if(ch == 'x') { // x to Reset the Game;
-                    this->Reset();
-                    return;
-                }
+                    if (ch == 'p') {  // p to Pause the game
+                        cout << "\n\n\t\tGame Paused..!! Press 'r' to Resume...\n\n";
+                        while (true) {
+                            if (_kbhit() && _getch() == 'r') {
+                                cout << "Game Resumed!\n";
+                                break;
+                            }
+                        }
+                        return;
+                    }
 
-                if(ch == 'a' || ch == 75) {
-                    if(Dir != RIGHT) Dir = LEFT;
-                } else if(ch == 's' || ch == 80) {
-                    if(Dir != UP) Dir = DOWN;
-                } else if(ch == 'w' || ch == 72) {
-                    if(Dir != DOWN) Dir = UP;
-                } else if(ch == 'd' || ch == 77) {
-                    if(Dir != LEFT) Dir = RIGHT;
+                    if(ch == 'x') { // x to Reset the Game;
+                        this->Reset();
+                        return;
+                    }
+
+                    if(ch == 'a' || ch == 75) {
+                        if(Dir != RIGHT) Dir = LEFT;
+                    } else if(ch == 's' || ch == 80) {
+                        if(Dir != UP) Dir = DOWN;
+                    } else if(ch == 'w' || ch == 72) {
+                        if(Dir != DOWN) Dir = UP;
+                    } else if(ch == 'd' || ch == 77) {
+                        if(Dir != LEFT) Dir = RIGHT;
+                    }
+                }
+                else {
+                    if(ch == 's' || ch == 80) {
+                        if(Dir != UP) Dir = DOWN;
+                    } else if(ch == 'w' || ch == 72) {
+                        if(Dir != DOWN) Dir = UP;
+                    } else if(ch == 'd' || ch == 77) {
+                        if(Dir != LEFT) Dir = RIGHT;
+                    }
                 }
             }
         }
@@ -617,7 +627,7 @@ int main() {
 
         cin >> play;
 
-    } while(play == 1);
+    } while(play == 1 && play == 49);
 
     cout << "\n\n\n\n\nOkay, Byee...  ";
     cout << "Thank You " << name << " For Playing Our Game..!!\n\n\n\n";
