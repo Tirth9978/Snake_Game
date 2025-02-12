@@ -134,7 +134,11 @@ class Snake :protected Game {
             // Dynamic allocation of tail of shake 
             Tail_X = new int[100];
             Tail_Y = new int[100];
-            Tail_Length = 0;
+            Tail_Length = 2;
+            Tail_X[0] = (this->width / 2) - 1;
+            Tail_Y[0] = this->height / 2;
+            Tail_Y[1] = this->height / 2;
+            Tail_X[1] = (this->width / 2) - 2;
         }
 
         ~Snake() {
