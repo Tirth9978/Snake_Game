@@ -6,7 +6,6 @@
 ## 📌 Table of Contents
 - [📖 Introduction](#-introduction)
 - [✨ Features](#-features)
-- [⚙️ Installation](#-installation)
 - [🎮 How to Play](#-how-to-play)
 - [🎯 Game Controls](#-game-controls)
 - [🕹️ Game Mechanics](#-game-mechanics)
@@ -34,23 +33,6 @@ This game is made by Bitwise Wizards.This project is a console-based Snake Game 
 
 ---
 
-## ⚙️ Installation
-```sh
-git clone https://github.com/Tirth9978/Snake_Game.git
-cd Snake_Game
-```
-For Linux/macOS:
-```sh
-g++ -o main main.cpp
-./main
-```
-For Windows (MinGW):
-```sh
-g++ -o main.exe main.cpp
-main.exe
-```
-
----
 
 ## 🎮 How to Play
 - Control the snake using `W, A, S, D` or arrow keys.
@@ -112,25 +94,14 @@ The game is implemented using **Object-Oriented Programming (OOP) principles**:
 | Variable | Data Type | Purpose |
 |----------|----------|---------|
 | `width, height` | `const int` | Defines the game board size. |
-| `x, y` | `int` | Stores the position of the snake’s head. |
+| `SnakeX, SnakeY` | `int` | Stores the position of the snake’s head. |
 | `fruitX, fruitY` | `int` | Stores the position of the fruit. |
 | `score` | `int` | Tracks player’s score. |
-| `nTail` | `int` | Stores snake length. |
+| `Tail_Length` | `int` | Stores snake length. |
 | `Tail_X[], Tail_Y[]` | `int arrays` | Stores tail coordinates. |
 | `obstacles` | `vector<pair<int, int>>` | Stores obstacle positions. |
-| `dir` | `enum direction` | Tracks movement direction. |
-| `gameOver` | `bool` | Checks if game has ended. |
-
-### 📜 **Functions & Their Purpose**
-| Function | Purpose |
-|----------|---------|
-| `Setup()` | Initializes game variables. |
-| `Draw()` | Renders the game board, snake, and fruit. |
-| `Input()` | Captures user input. |
-| `Logic()` | Handles movement and collisions. |
-| `generateFruit()` | Places a fruit randomly. |
-| `generateObstacles()` | Adds obstacles dynamically. |
-| `RestartGame()` | Resets game state. |
+| `Dir` | `enum direction` | Tracks movement direction. |
+| `isGameOver` | `bool` | Checks if game has ended. |
 
 ---
 
