@@ -94,14 +94,14 @@ The game is implemented using **Object-Oriented Programming (OOP) principles**:
 | Variable | Data Type | Purpose |
 |----------|----------|---------|
 | `width, height` | `const int` | Defines the game board size. |
-| `x, y` | `int` | Stores the position of the snake’s head. |
+| `SnakeX, SnakeY` | `int` | Stores the position of the snake’s head. |
 | `fruitX, fruitY` | `int` | Stores the position of the fruit. |
 | `score` | `int` | Tracks player’s score. |
-| `nTail` | `int` | Stores snake length. |
+| `Tail_Length` | `int` | Stores snake length. |
 | `Tail_X[], Tail_Y[]` | `int arrays` | Stores tail coordinates. |
 | `obstacles` | `vector<pair<int, int>>` | Stores obstacle positions. |
-| `dir` | `enum direction` | Tracks movement direction. |
-| `gameOver` | `bool` | Checks if game has ended. |
+| `Dir` | `enum direction` | Tracks movement direction. |
+| `isGameOver` | `bool` | Checks if game has ended. |
 
 ---
 
