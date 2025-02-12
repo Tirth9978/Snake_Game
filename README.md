@@ -103,17 +103,6 @@ The game is implemented using **Object-Oriented Programming (OOP) principles**:
 | `dir` | `enum direction` | Tracks movement direction. |
 | `gameOver` | `bool` | Checks if game has ended. |
 
-### 📜 **Functions & Their Purpose**
-| Function | Purpose |
-|----------|---------|
-| `Setup()` | Initializes game variables. |
-| `Draw()` | Renders the game board, snake, and fruit. |
-| `Input()` | Captures user input. |
-| `Logic()` | Handles movement and collisions. |
-| `generateFruit()` | Places a fruit randomly. |
-| `generateObstacles()` | Adds obstacles dynamically. |
-| `RestartGame()` | Resets game state. |
-
 ---
 
 ## 🚀 Future Enhancements
