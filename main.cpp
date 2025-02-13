@@ -164,7 +164,7 @@ class Fruit : protected Snake {
         void generateFruit() {
             this->fruitX = 1 + rand() % (this->width - 2);
             this->fruitY = 1 + rand() % (this->height - 2);
-            this->specialFruit = (bool)(rand() % 10 == 0);
+            this->specialFruit = (bool)(rand() % 7 == 0);
         }
 };   
 
@@ -556,24 +556,9 @@ int main() {
     cout << "\n\nEnter your Name : ";
     getline(cin, name);
 
-    // Set Difficuly of the game.
-    int diff = 0;
-    cout << "\n\n";
-    cout << "Difficulty Levels : " << endl;
-    cout << "1. Easy\n2. Medium\n3. Hard\n\n";
-    cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n\n";
-    cout << "Set Difficulty Level : ";
-    cin >> diff;
     
-    if (diff == 3) {
-        diff = 90;
-    } else if(diff == 2) {
-        diff = 140;
-    } else if(diff == 1) {
-        diff = 190;
-    } else {
-        diff = 140;
-    }
+    
+    
 
     srand(time(NULL)); // Like Seed For rand() Function;
     int max_score = 0;
@@ -582,7 +567,23 @@ int main() {
     do {
 
         // system(CLEAR);
-        
+        // Set Difficuly of the game.
+        int diff = 0;
+        cout << "\n\n";
+        cout << "Difficulty Levels : " << endl;
+        cout << "1. Easy\n2. Medium\n3. Hard\n\n";
+        cout << "NOTE : If You Press Key Other than 1, 2 or 3 then Difficulty Will Set Automatically to Medium..\n\n";
+        cout << "Set Difficulty Level : ";
+        cin >> diff;
+        if (diff == 3) {
+            diff = 90;
+        } else if(diff == 2) {
+            diff = 140;
+        } else if(diff == 1) {
+            diff = 190;
+        } else {
+            diff = 140;
+        }
         cout <<"\n\n";
 
         int wallsEnable = 1;
@@ -633,7 +634,7 @@ int main() {
 
         cin >> play;
 
-    } while(play == 1 && play == 49);
+    } while(play == 1 || play == 49);
 
     cout << "\n\n\n\n\nOkay, Byee...  ";
     cout << "Thank You " << name << " For Playing Our Game..!!\n\n\n\n";
