@@ -99,6 +99,7 @@ class Game {
         int width;
         int height;
         int score;
+        // int max_score ;
         bool isGameOver;
         direction Dir;
         vector<pair<int, int>> obstacles;
@@ -112,6 +113,7 @@ class Game {
             this->width = 70;
             this->height = 20;
             this->score = 0;
+            // this->max_score = 0;
             this->isGameOver = false;
             this->Dir = STOP;
         }
@@ -216,7 +218,7 @@ class Main : protected Fruit {
             }
         }
 
-        void Main_Board(string name) { 
+        void Main_Board(string name,int& max_score) { 
             system(CLEAR);
 
             cout << "\n\n";
@@ -268,7 +270,8 @@ class Main : protected Fruit {
                 if(i == 13) cout << "       P = Pause | R = Resume";
                 if(i == 14) cout << "       X = Reset | ESC = Exit";
 
-                if(i == 18) cout << "       " << name << "'s Score : " << this->score;
+                if(i == 17) cout << "       " << name << "'s Score : " << this->score;
+                if (i == 19) cout << "       " << name << "'s High Score : " << max_score ;
 
                 cout << endl;
             }
@@ -280,7 +283,7 @@ class Main : protected Fruit {
 
         }
         
-        void Update_Game(int diff, int wallsEnable){
+        void Update_Game(int diff, int wallsEnable,int& max_score){
 
             frameCount++;
 
@@ -366,6 +369,9 @@ class Main : protected Fruit {
                     score += 20; // if snake eats Special Fruit then score increases by 20;
                 } else {
                     score += 5;
+                }
+                if (score > max_score){
+                    max_score = score;
                 }
                 Tail_Length++;
 
@@ -570,7 +576,7 @@ int main() {
     }
 
     srand(time(NULL)); // Like Seed For rand() Function;
-
+    int max_score = 0;
     int play = 0;
     // this is the do-while loop for if you want to play again the game 
     do {
@@ -592,11 +598,11 @@ int main() {
         // main part of methods calling 
         while(!game.isOver()){
             // Frontend of the game board
-            game.Main_Board(name);
+            game.Main_Board(name,max_score);
             // Keys press  
             game.Input();
             // Backend Part of the game 
-            game.Update_Game(diff, wallsEnable);
+            game.Update_Game(diff, wallsEnable,max_score);
 
             #if defined(_WIN32) || defined(_WIN64)
                 Sleep(max(50, diff));
@@ -620,7 +626,7 @@ int main() {
 
         cout << "                                        ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
-
+        cout << "Your Highest Score : " << max_score << "\n\n\n";
         cout << "\n\nDo You Want To Play Again..?\n\n";
         cout << "NOTE : If You Press Key Other Than 0 or 1 Then Computer will treat it as 0..\n";
         cout << "Enter 1 For \"YES\" and 0 For \"NO\" : ";
