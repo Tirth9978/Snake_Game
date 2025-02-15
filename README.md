@@ -1,5 +1,4 @@
-
-# 🐍 Snake Game
+# 🐍 Classic Snake Game in C++ | Console-Based Open-Source Project  
 
 ---
 
@@ -9,36 +8,44 @@
 - [🎮 How to Play](#-how-to-play)
 - [🎯 Game Controls](#-game-controls)
 - [🕹️ Game Mechanics](#-game-mechanics)
-- [💡 Code Structure](#-code-structure)
-- [📊 Data Structure Analysis](#-data-structure-analysis)
-- [📜 Detailed Code Explanation](#-detailed-code-explanation)
+- [💡 Code Structure & OOP Concepts](#-code-structure--oop-concepts)
+- [📊 Data Structures Used](#-data-structures-used)
+- [📜 Code Explanation](#-code-explanation)
 - [🚀 Future Enhancements](#-future-enhancements)
 - [👥 Contributors](#-contributors)
+- [⭐ Star & Contribute](#-star--contribute)
 
 ---
 
 ## 📖 Introduction
-This game is made by Bitwise Wizards.This project is a console-based Snake Game implemented in C++. It follows an object-oriented approach using classes and inheritance to manage game components like the snake, fruit, and game board.**Our code is for Windows and Linux.It will work in both OS.**
+This **classic Snake Game** is developed by **Bitwise Wizards** in **C++** using **Object-Oriented Programming (OOP)**.  
+It is a **console-based game** that runs on **Windows and Linux** without external libraries.  
+The project is **fully open-source**, making it a great resource for beginners in **C++ game development**.
+
+🔥 **Why This Game?**  
+- Learn **C++ game development** from scratch.  
+- Explore **OOP principles (classes, inheritance)**.  
+- Improve problem-solving skills with **data structures & algorithms**.  
 
 ---
 
 ## ✨ Features
-- 🎯 Grid-based gameplay.
-- 🎮 Snake movement using keyboard controls.
-- 🍏 Normal and special fruits for scoring.
-- 🚧 Obstacles appear as the game progresses.
-- 🧱 Wall collision mode (can be enabled or disabled).
-- 🔄 Dynamic difficulty adjustment.
-- 📺 Clear UI with instructions and score tracking.
+- 🎯 **Classic grid-based gameplay**.
+- 🎮 **Smooth snake movement** using keyboard controls.
+- 🍏 **Normal & Special Fruits** for scoring.
+- 🚧 **Dynamic obstacles** appear as the game progresses.
+- 🧱 **Wall collision mode** (can be enabled/disabled).
+- 📺 **Simple UI with live score tracking**.
+- 🔄 **Difficulty increases dynamically** as score progresses.
 
 ---
 
-
 ## 🎮 How to Play
-- Control the snake using `W, A, S, D` or arrow keys.
-- 🍏 Eat fruits (`@` for normal, `$` for special) to grow and score points.
-- 🚧 Avoid walls and obstacles (`#`).
-- ☠️ Game over if the snake collides with itself or obstacles.
+- Move the snake using `W, A, S, D` or **arrow keys**.
+- 🍏 **Eat normal fruits (`@`)** to gain **5 points**.
+- 💰 **Eat special fruits (`$`)** to gain **20 points**.
+- 🚧 Avoid **walls & obstacles (`#`)**.
+- ☠️ **Game Over** if the snake collides with itself or an obstacle.
 - 🔄 Restart or exit after game over.
 
 ---
@@ -59,65 +66,74 @@ This game is made by Bitwise Wizards.This project is a console-based Snake Game 
 
 ## 🕹️ Game Mechanics
 - 🐍 The snake moves continuously in the last chosen direction.
-- 🍏 Eating a normal fruit (@) increases the score by **5 points**.
-- 💰 Eating a special fruit ($) increases the score by **20 points**.
-- 🚧 Once the score reaches **50**, obstacles appear.
-- 🔼 The difficulty increases dynamically with score progression.
+- 🍏 Eating a **normal fruit (`@`)** increases score by **5 points**.
+- 💰 Eating a **special fruit (`$`)** increases score by **20 points**.
+- 🚧 **Obstacles appear** once the score reaches **50**.
+- 🔼 The difficulty **dynamically increases** as you score higher.
 
 ---
 
-## 💡 Code Structure
-The game is implemented using **Object-Oriented Programming (OOP) principles**:
-- 🛠️ `Game` (Base Class): Defines the core game logic and properties.
-- 🐍 `Snake` (Inherits from Game): Handles the snake’s movement.
-- 🍏 `Fruit` (Inherits from Snake): Manages fruit generation.
-- 🎮 `Main` (Inherits from Fruit): Controls the game loop, rendering, and input handling.
+## 💡 Code Structure & OOP Concepts
+This project follows **Object-Oriented Programming (OOP)** principles:  
+
+- 🛠️ **Game (Base Class)** → Defines core game logic.  
+- 🐍 **Snake (Inherits from Game)** → Handles movement & tail growth.  
+- 🍏 **Fruit (Inherits from Snake)** → Manages fruit generation.  
+- 🎮 **Main (Inherits from Fruit)** → Controls the **game loop**, rendering, and input handling.  
 
 ---
 
-## 📊 Data Structure Analysis
-### 📂 **Data Structures Used**
-- 📌 **Arrays (`int Tail_X[], Tail_Y[]`)**: Stores the position of the snake's tail.
-- 📊 **Vector (`vector<pair<int, int>> obstacles`)**: Stores obstacle positions efficiently.
-- 🔢 **Enum (`enum direction`)**: Represents movement directions (`LEFT, RIGHT, UP, DOWN, STOP`).
-
-### 🔍 **Object Structure**
-1. **Game Class**: Initializes board size, score, and game state.
-2. **Snake Class**: Extends Game by adding movement and tail logic.
-3. **Fruit Class**: Extends Snake to generate food at random locations.
-4. **Main Class**: Controls the entire game flow, rendering, and input processing.
+## 📊 Data Structures Used
+### **🔹 Data Structures Implemented**
+| Data Structure | Purpose |
+|---------------|---------|
+| **Arrays** (`int Tail_X[], Tail_Y[]`) | Stores the snake’s tail positions. |
+| **Vector** (`vector<pair<int, int>> obstacles`) | Efficiently stores obstacle positions. |
+| **Enum** (`enum direction`) | Represents movement directions (`LEFT, RIGHT, UP, DOWN, STOP`). |
 
 ---
 
-## 📜 Detailed Code Explanation
-### 📌 **Variables & Their Purpose**
+## 📜 Code Explanation
+### **📌 Important Variables**
 | Variable | Data Type | Purpose |
 |----------|----------|---------|
-| `width, height` | `const int` | Defines the game board size. |
-| `SnakeX, SnakeY` | `int` | Stores the position of the snake’s head. |
-| `fruitX, fruitY` | `int` | Stores the position of the fruit. |
-| `score` | `int` | Tracks player’s score. |
-| `Tail_Length` | `int` | Stores snake length. |
+| `width, height` | `const int` | Defines board size. |
+| `SnakeX, SnakeY` | `int` | Snake’s head position. |
+| `fruitX, fruitY` | `int` | Fruit’s position. |
+| `score` | `int` | Player’s current score. |
+| `Tail_Length` | `int` | Stores snake’s length. |
 | `Tail_X[], Tail_Y[]` | `int arrays` | Stores tail coordinates. |
 | `obstacles` | `vector<pair<int, int>>` | Stores obstacle positions. |
 | `Dir` | `enum direction` | Tracks movement direction. |
-| `isGameOver` | `bool` | Checks if game has ended. |
+| `isGameOver` | `bool` | Checks if game is over. |
 
 ---
 
 ## 🚀 Future Enhancements
-- 🎮 Multiple levels with increasing complexity.
-- 👫 Multiplayer mode with two snakes.
-- 🏆 High score tracking system.
-- 🤖 AI-controlled opponent snakes.
-- 🎨 GUI-based version using a graphics library.
+We plan to add **more exciting features**:
+- 🎮 **Multiple Levels** with increasing complexity.
+- 👫 **Multiplayer Mode** with two snakes.
+- 🏆 **High Score System** to track best performances.
+- 🤖 **AI-controlled Snakes** as opponents.
+- 🎨 **GUI-based version** using a graphics library.
+
+Have ideas? **Open an issue or contribute!** 🚀  
 
 ---
 
 ## 👥 Contributors
-- 🏅 Tirth Patel (202401157)
-- 🏅 Raj Patel (202401152)
-- 🏅 Shlok Patel (202401156)
-- 🏅 Prakriti Pandey (202401164)
+- 🏅 **Tirth Patel (202401157)**
+- 🏅 **Raj Patel (202401152)**
+- 🏅 **Shlok Patel (202401156)**
+- 🏅 **Prakriti Pandey (202401164)**
+
+🙌 **Special thanks to all contributors!**
 
 ---
+
+## ⭐ Star & Contribute  
+If you find this project useful, please consider **starring ⭐ the repo**!  
+
+🔗 **GitHub Repository:** [Snake Game in C++](https://github.com/Tirth9978/Snake_Game)  
+
+💡 **Want to contribute?** Fork the repo, make improvements, and submit a pull request! 🚀  
