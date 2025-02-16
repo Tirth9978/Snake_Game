@@ -17,6 +17,10 @@ Makers :
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include<windows.h>
+#include<mmsystem.h>
+using namespace std ;
+#pragma comment(lib, "winmm.lib")
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <conio.h>
@@ -79,7 +83,7 @@ Makers :
 
 #endif
 
-using namespace std;
+// using namespace std;
 
 // ENUM Part
 enum direction { 
@@ -614,7 +618,8 @@ int main() {
         }
         
         system(CLEAR);
-
+        PlaySound(TEXT("game-over-31-179699.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        // Sleep()
         cout << "\n\n\n";
         cout << R"(
                               _____                         ____                 
@@ -624,7 +629,7 @@ int main() {
                             | |__| | (_| | | | | | |  __/ | |__| |\ V /  __/ |   
                              \_____|\__,_|_| |_| |_|\___|  \____/  \_/ \___|_|   
         )" << "\n\n\n\n\n";
-
+        Sleep(3000);
         cout << "                                        ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
         cout << "Your Highest Score : " << max_score << "\n\n\n";
