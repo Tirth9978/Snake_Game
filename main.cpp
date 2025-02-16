@@ -1,5 +1,13 @@
 /*
 
+Write this command to run 
+g++ main.cpp -o main -lwinmm
+
+*/
+
+
+/*
+
 IT206 Project 1 : Snake Game 
 
 This game is made by Bitwise Wizards . 
