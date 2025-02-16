@@ -1,9 +1,3 @@
-/*
-
-Write this command to run 
-g++ main.cpp -o main -lwinmm
-
-*/
 
 
 /*
@@ -32,8 +26,8 @@ using namespace std ;
 #if defined(_WIN32) || defined(_WIN64)
     #include <conio.h>   
     #include<windows.h>
-    #include<mmsystem.h>
-    #pragma comment(lib, "winmm.lib")
+    // #include<mmsystem.h>
+    // #pragma comment(lib, "winmm.lib")
     #define CLEAR "cls"
 
 #else 
@@ -627,9 +621,9 @@ int main() {
         }
         
         system(CLEAR);
-        #if defined(_WIN32) || defined(_WIN64)
-        PlaySound(TEXT("game-over-31-179699.wav"), NULL, SND_FILENAME | SND_ASYNC);
-        #endif
+        // #if defined(_WIN32) || defined(_WIN64)
+        // PlaySound(TEXT("game-over-31-179699.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        // #endif
         // Sleep()
         cout << "\n\n\n";
         cout << R"(
@@ -640,9 +634,9 @@ int main() {
                             | |__| | (_| | | | | | |  __/ | |__| |\ V /  __/ |   
                              \_____|\__,_|_| |_| |_|\___|  \____/  \_/ \___|_|   
         )" << "\n\n\n\n\n";
-        #if defined(_WIN32) || defined(_WIN64)
-        Sleep(3000);
-        #endif
+        // #if defined(_WIN32) || defined(_WIN64)
+        // Sleep(3000);
+        // #endif
         
         cout << "                                        ";
         cout << "G A M E  O V E R  ! ! ! \n\n\n\n\n";
